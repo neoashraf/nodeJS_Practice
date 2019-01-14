@@ -7,11 +7,13 @@ var server = http.createServer((req, res)=>{
     var parseUrl = url.parse(req.url, true);
     // get the pathanme
     var path = parseUrl.pathname;
+    // trim extra /
     path = path.replace(/^\/+|\/+$/g, '');
+    var requestMethod = req.method.toLowerCase();
     // send response to the client
     res.end('Hola Baby!');
     // log message
-    console.log(`User is hitting on ${path}`);
+    console.log(`User is hitting on ${path} with method ${requestMethod}.`);
 
 });
 
