@@ -4,16 +4,18 @@ const url = require('url');
 var server = http.createServer((req, res)=>{
 
     // get url and parse it
-    var parseUrl = url.parse(req.url, true);
+    var parsedUrl = url.parse(req.url, true);
     // get the pathanme
-    var path = parseUrl.pathname;
-    // trim extra /
+    var path = parsedUrl.pathname;
+    // trim extra / at the end of req url
     path = path.replace(/^\/+|\/+$/g, '');
     var requestMethod = req.method.toLowerCase();
+
+    var queryStringObject = parsedUrl.query;
     // send response to the client
     res.end('Hola Baby!');
     // log message
-    console.log(`User is hitting on ${path} with method ${requestMethod}.`);
+    console.log(`User is hitting on ${path} with method ${requestMethod} and with quey ${queryStringObject}`);
 
 });
 
